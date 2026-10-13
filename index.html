@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Abroad｜留學申請小幫手</title>
+<style>
+:root{
+  --cream:#fbf8ff;--paper:#ffffff;--ink:#4d4856;--muted:#898392;
+  --pink:#f7dce5;--pink-dark:#c47f9b;--lav:#e5e1fb;--lav-dark:#8174c4;
+  --sage:#dcefe7;--sage-dark:#679987;--butter:#fff0c9;--blue:#dcecfb;--line:#eee7f3;
+  --shadow:0 12px 28px rgba(112,91,145,.12),0 3px 8px rgba(112,91,145,.06);--radius:22px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#fcf9ff 0%,#fffaf6 48%,#f6fbff 100%);color:var(--ink);font-family:ui-rounded,"Nunito","Noto Sans TC",system-ui,-apple-system,sans-serif;line-height:1.55}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0}
+.app{max-width:1180px;margin:auto;padding:24px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:17px;background:var(--pink);display:grid;place-items:center;font-size:25px;box-shadow:inset 0 -4px 0 #eac4cb}
+.brand h1{font-size:21px;margin:0;letter-spacing:.2px}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.top-actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{padding:10px 15px;border-radius:13px;font-weight:700;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn:hover{transform:translateY(-1px);filter:brightness(.98)}
+.btn-primary{background:var(--lav-dark);color:white;box-shadow:0 5px 12px #8275b82a}
+.btn-soft{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-pink{background:var(--pink);color:#7d4e5a}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:28px 30px;background:linear-gradient(115deg,#f7dfe1 0%,#f8e9c7 53%,#e9e5fa 100%);display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px}
+.hero:after{content:"✦  ✧  ";position:absolute;right:22px;top:12px;font-size:25px;letter-spacing:12px;color:#fff9}
+.hero h2{font-size:clamp(24px,3.5vw,35px);line-height:1.2;margin:0 0 10px;max-width:600px}
+.hero p{margin:0;color:#6f6269;max-width:560px}
+.hero-note{flex-shrink:0;background:#ffffffa8;border:1px solid #ffffffb8;border-radius:22px;padding:15px 19px;text-align:center;min-width:135px}
+.hero-note .emoji{font-size:29px}.hero-note strong{display:block;font-size:22px}.hero-note span{font-size:12px;color:#756b73}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.stat{background:var(--paper);border:1px solid #eee7f3;border-radius:19px;padding:17px 18px;box-shadow:0 9px 22px rgba(124,105,160,.10),0 2px 5px rgba(124,105,160,.05)}
+.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}
+.stat-icon{font-size:19px}.stat strong{display:block;font-size:27px;margin:4px 0 0;letter-spacing:-.5px}
+.stat small{font-size:11px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr);gap:18px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:21px;box-shadow:0 12px 28px rgba(112,91,145,.12),0 3px 8px rgba(112,91,145,.06);margin-bottom:18px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}
+.panel h3{margin:0;font-size:17px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}
+.chip{background:#faf7f4;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:#827983}
+.chip.active{background:#e9e4f8;border-color:#e9e4f8;color:#66599b;font-weight:800}
+.school-list{display:grid;gap:11px}
+.school-card{border:1px solid #eee6f4;border-radius:17px;padding:15px;display:grid;grid-template-columns:47px minmax(0,1fr) auto;gap:12px;align-items:start;background:linear-gradient(135deg,#fff 0%,#fffdff 100%);box-shadow:0 5px 16px rgba(124,105,160,.08);transition:.2s}
+.school-card:hover{border-color:#e4d8ed;transform:translateY(-1px)}
+.school-mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--lav);font-size:21px}
+.school-card:nth-child(3n+2) .school-mark{background:var(--sage)}
+.school-card:nth-child(3n) .school-mark{background:var(--butter)}
+.school-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.school-title strong{font-size:15px}
+.country{font-size:11px;color:var(--muted);background:#f6f1ed;border-radius:7px;padding:3px 7px}
+.school-meta{font-size:12px;color:var(--muted);margin:5px 0 9px}.website-link{display:inline-block;color:#7968b7;text-decoration:none;font-weight:800;border-bottom:1px solid #d9d0f2;padding-bottom:1px}.website-link:hover{color:#5f4ca3;border-color:#9d8bd4}
+.mini-progress{height:6px;background:#f1ece9;border-radius:99px;overflow:hidden;max-width:330px}
+.mini-progress span{height:100%;display:block;background:linear-gradient(90deg,#d8c9ef,#b7a5df);border-radius:99px}
+.progress-label{display:flex;justify-content:space-between;max-width:330px;font-size:10px;color:var(--muted);margin-top:5px}
+.status{white-space:nowrap;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:800}
+.status.prep{background:#f8edc9;color:#94773a}.status.progress{background:#e8e2f8;color:#7869ad}.status.sent{background:#dceee0;color:#5d8868}.status.offer{background:#f8dfe4;color:#a85e72}
+.card-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.tiny-btn{background:#f7f2ee;color:#756c75;padding:6px 9px;border-radius:9px;font-size:11px}
+.tiny-btn:hover{background:#eee5f3}
+.empty{text-align:center;padding:28px 10px;color:var(--muted);font-size:13px}
+.task-list{display:grid;gap:12px}
+.task{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f4efeb}
+.task:last-child{border-bottom:0;padding-bottom:0}
+.task input{accent-color:#9383c7;width:17px;height:17px;margin-top:3px;flex-shrink:0}
+.task-body{flex:1;min-width:0}.task-title{font-size:13px;font-weight:700}.task.done .task-title{text-decoration:line-through;color:#aaa1a7}
+.task-meta{font-size:11px;color:var(--muted);margin-top:3px}
+.due{font-size:10px;background:#fff0e7;color:#b67858;border-radius:7px;padding:4px 6px;white-space:nowrap}
+.due.late{background:#fde4e7;color:#b44d62}
+.add-task{margin-top:13px;width:100%;background:#faf6f2;color:#8a7e88;border:1px dashed #e5d8d5;border-radius:12px;padding:10px}
+.deadline-list{display:grid;gap:11px}
+.deadline{display:flex;gap:11px;align-items:center}
+.date-box{width:45px;height:48px;border-radius:13px;background:#f5e5e8;display:grid;place-content:center;text-align:center;flex-shrink:0}
+.date-box b{font-size:16px;line-height:1.1}.date-box span{font-size:9px;color:#9c7580}
+.deadline:nth-child(2) .date-box{background:#e8e3f7}.deadline:nth-child(3) .date-box{background:#e1ecdf}
+.deadline-info{flex:1;min-width:0}.deadline-info strong{display:block;font-size:12px}.deadline-info span{font-size:11px;color:var(--muted)}
+.countdown{font-size:11px;color:#8776b6;font-weight:800;white-space:nowrap}
+.quote{background:#f8f4ff;border-radius:17px;padding:16px;color:#756991;font-size:13px}
+.quote b{display:block;color:#66588f;margin-bottom:5px}
+.footer{text-align:center;color:#a69aa3;font-size:11px;padding:10px 0 20px}
+.modal-backdrop{position:fixed;inset:0;background:#44374b66;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
+.modal-backdrop.show{display:flex}
+.modal{background:#fffdf9;border-radius:24px;padding:24px;width:min(540px,100%);max-height:90vh;overflow:auto;box-shadow:0 25px 80px #3f30452e}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
+.modal-head h3{margin:0;font-size:19px}
+.close{background:#f4ece8;border-radius:10px;width:34px;height:34px;font-size:20px;color:#7f727c}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:800;color:#766d77}
+.field input,.field select,.field textarea{width:100%;border:1px solid #e9dfda;background:white;border-radius:11px;padding:10px 11px;outline:none;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#b8a8dc;box-shadow:0 0 0 3px #eee9fa}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#554b60;color:white;padding:11px 17px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:30;font-size:13px}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.hero{align-items:flex-start}.hero-note{min-width:105px;padding:12px}.app{padding:16px}}
+@media(max-width:520px){.topbar{align-items:flex-start}.brand h1{font-size:18px}.top-actions .btn{padding:9px 10px;font-size:12px}.hero{padding:22px 19px}.hero-note{display:none}.panel{padding:16px}.school-card{grid-template-columns:40px minmax(0,1fr)}.school-mark{width:40px;height:40px}.school-card>.status{grid-column:2;justify-self:start;grid-row:2}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats .stat{padding:14px}.stat strong{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">DA</div><div><h1>Dream Abroad</h1><p>把夢想，一步一步整理好 </p></div></div>
+    <div class="top-actions"><button class="btn btn-soft" id="exportBtn">↗ 匯出資料</button><button class="btn btn-primary" id="addSchoolBtn">＋ 新增學校</button></div>
+  </header>
+  <section class="hero">
+    <div><h2>Every little step<br>brings you closer. </h2><p>你的留學申請管理中心。整理學校、追蹤文件、記住重要日子，讓申請流程更有條理。</p></div>
+    <div class="hero-note"><div class="emoji"></div><strong id="heroPercent">0%</strong><span>整體申請進度</span></div>
+  </section>
+  <section class="stats">
+    <div class="stat"><div class="stat-top">申請學校</div><strong id="statSchools">0</strong><small>正在規劃的夢想清單</small></div>
+    <div class="stat"><div class="stat-top">已完成任務 <span class="stat-icon"></span></div><strong id="statTasks">0/0</strong><small>追蹤每一項申請任務</small></div>
+    <div class="stat"><div class="stat-top">最近截止日 <span class="stat-icon"></span></div><strong id="statDeadline">—</strong><small id="statDeadlineSub">新增截止日來提醒自己</small></div>
+    <div class="stat"><div class="stat-top">已取得 Offer <span class="stat-icon"></span></div><strong id="statOffers">0</strong><small>追蹤錄取結果</small></div>
+  </section>
+  <div class="layout">
+    <main>
+      <section class="panel">
+        <div class="panel-head"><div><h3>我的申請學校</h3><div class="sub">集中管理每間學校的申請進度</div></div><button class="btn btn-pink" id="quickAdd">＋ 新增</button></div>
+        <div class="filters" id="filters">
+          <button class="chip active" data-filter="all">全部學校</button><button class="chip" data-filter="準備中">準備中</button><button class="chip" data-filter="申請中">申請中</button><button class="chip" data-filter="已送出">已送出</button><button class="chip" data-filter="已錄取">已錄取</button>
+        </div>
+        <div class="school-list" id="schoolList"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><h3>任務 申請待辦清單</h3><div class="sub">勾選完成項目，讓進度慢慢累積</div></div><span class="country" id="taskCount">0 項待辦</span></div>
+        <div class="task-list" id="taskList"></div>
+        <button class="add-task" id="addTaskBtn">＋ 新增一項待辦任務</button>
+      </section>
+    </main>
+    <aside>
+      <section class="panel">
+        <div class="panel-head"><div><h3>日程 重要日程</h3><div class="sub">別讓重要日子偷偷溜走</div></div></div>
+        <div class="deadline-list" id="deadlineList"></div>
+        <button class="add-task" id="addDeadlineBtn">＋ 新增截止日</button>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><h3>今日小鼓勵</h3></div><span></span></div>
+        <div class="quote"><b id="quoteTitle">慢慢來也沒關係</b><span id="quoteText">留學申請是一段旅程，不需要一次完成所有事情。今天完成一小步，就已經很不錯。</span></div>
+        <button class="add-task" id="newQuoteBtn">給我另一句鼓勵 </button>
+      </section>
+    </aside>
+  </div>
+  <div class="footer">Made with  for your next chapter · 資料儲存在目前瀏覽器中</div>
+</div>
+
+<div class="modal-backdrop" id="schoolModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="schoolModalTitle">新增申請學校</h3><button class="close" data-close="schoolModal">×</button></div>
+    <form id="schoolForm">
+      <input type="hidden" id="schoolId">
+      <div class="form-grid">
+        <div class="field"><label for="schoolName">學校名稱 *</label><input id="schoolName" required placeholder="例如：University of Manchester"></div>
+        <div class="field"><label for="schoolProgram">申請科系</label><input id="schoolProgram" placeholder="例如：Accounting and Finance"></div>
+        <div class="field"><label for="schoolCountry">國家／地區</label><select id="schoolCountry"><option>英國</option><option>美國</option><option>加拿大</option><option>澳洲</option><option>新加坡</option><option>其他</option></select></div>
+        <div class="field"><label for="schoolStatus">申請狀態</label><select id="schoolStatus"><option>準備中</option><option>申請中</option><option>已送出</option><option>已錄取</option><option>未錄取</option></select></div>
+        <div class="field"><label for="schoolDeadline">申請截止日</label><input id="schoolDeadline" type="date"></div>
+        <div class="field"><label for="schoolWebsite">學校官網連結</label><input id="schoolWebsite" type="url" placeholder="https://www.example.ac.uk"></div>
+        <div class="field"><label for="schoolProgress">目前進度（%）</label><input id="schoolProgress" type="number" min="0" max="100" value="20"></div>
+        <div class="field full"><label for="schoolNotes">備註</label><textarea id="schoolNotes" rows="2" placeholder="例如：需要確認 IELTS 門檻、推薦信狀態…"></textarea></div>
+      </div>
+      <div class="modal-actions"><button type="button" class="btn btn-soft" data-close="schoolModal">取消</button><button type="submit" class="btn btn-primary">儲存學校</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="taskModal">
+  <div class="modal">
+    <div class="modal-head"><h3>新增待辦任務</h3><button class="close" data-close="taskModal">×</button></div>
+    <form id="taskForm"><div class="form-grid">
+      <div class="field full"><label for="taskTitleInput">任務名稱 *</label><input id="taskTitleInput" required placeholder="例如：完成個人讀書計畫"></div>
+      <div class="field"><label for="taskCategory">任務類別</label><select id="taskCategory"><option>申請文件</option><option>語言檢定</option><option>推薦信</option><option>研究課程</option><option>財務規劃</option><option>其他</option></select></div>
+      <div class="field"><label for="taskDue">預計完成日</label><input id="taskDue" type="date"></div>
+    </div><div class="modal-actions"><button type="button" class="btn btn-soft" data-close="taskModal">取消</button><button type="submit" class="btn btn-primary">新增任務</button></div></form>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="deadlineModal">
+  <div class="modal">
+    <div class="modal-head"><h3>新增重要日程</h3><button class="close" data-close="deadlineModal">×</button></div>
+    <form id="deadlineForm"><div class="form-grid">
+      <div class="field full"><label for="deadlineTitle">日程名稱 *</label><input id="deadlineTitle" required placeholder="例如：IELTS 考試日"></div>
+      <div class="field"><label for="deadlineDate">日期 *</label><input id="deadlineDate" type="date" required></div>
+      <div class="field"><label for="deadlineType">類別</label><select id="deadlineType"><option>申請截止</option><option>語言考試</option><option>推薦信</option><option>其他</option></select></div>
+    </div><div class="modal-actions"><button type="button" class="btn btn-soft" data-close="deadlineModal">取消</button><button type="submit" class="btn btn-primary">儲存日程</button></div></form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+  const STORAGE_KEY = 'dreamAbroadApp_v1';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const iso = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
+  const addDays = n => { const d = new Date(); d.setDate(d.getDate()+n); return iso(d); };
+  const initialData = {
+    schools:[
+      {id:1,name:'The University of Manchester',program:'MSc Accounting and Finance',country:'英國',website:'https://www.manchester.ac.uk/',status:'準備中',deadline:addDays(45),progress:35,notes:'確認 IELTS 要求與推薦信'},
+      {id:2,name:'The University of Edinburgh',program:'Accounting and Financial Management MSc',country:'英國',website:'https://www.ed.ac.uk/',status:'申請中',deadline:addDays(62),progress:55,notes:'整理個人陳述與課程動機'},
+      {id:3,name:'University of Warwick',program:'Accounting & Financial Management MSc',country:'英國',website:'https://www.warwick.ac.uk/',status:'準備中',deadline:addDays(78),progress:20,notes:'研究選修課程與實習模組'}
+    ],
+    tasks:[
+      {id:1,title:'整理各校 IELTS / 英文門檻',category:'語言檢定',due:addDays(5),done:false},
+      {id:2,title:'更新英文履歷 CV',category:'申請文件',due:addDays(8),done:false},
+      {id:3,title:'準備個人陳述初稿',category:'申請文件',due:addDays(12),done:false},
+      {id:4,title:'向教授確認推薦信安排',category:'推薦信',due:addDays(3),done:true},
+      {id:5,title:'比較各校課程與職涯方向',category:'研究課程',due:addDays(15),done:false}
+    ],
+    deadlines:[
+      {id:1,title:'確認推薦信安排',date:addDays(3),type:'推薦信'},
+      {id:2,title:'IELTS 模考與檢討',date:addDays(10),type:'語言考試'},
+      {id:3,title:'完成 CV 第一版',date:addDays(14),type:'申請文件'}
+    ]
+  };
+  let data;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || initialData; }
+  catch(e) { data = initialData; }
+  let currentFilter = 'all';
+  let nextId = Math.max(0,...[...data.schools,...data.tasks,...data.deadlines].map(x=>Number(x.id)||0))+1;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmt = date => date ? `${new Date(date+'T00:00:00').getMonth()+1}/${new Date(date+'T00:00:00').getDate()}` : '未設定';
+  const daysUntil = date => { if(!date) return null; const d=new Date(date+'T00:00:00'); return Math.ceil((d-today)/86400000); };
+  const save = () => { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); render(); };
+  const statusClass = s => ({'準備中':'prep','申請中':'progress','已送出':'sent','已錄取':'offer','未錄取':'prep'}[s]||'prep');
+  function renderStats(){
+    $('statSchools').textContent=data.schools.length;
+    const done=data.tasks.filter(t=>t.done).length;
+    $('statTasks').textContent=`${done}/${data.tasks.length}`;
+    const future=data.deadlines.filter(d=>d.date && daysUntil(d.date)>=0).sort((a,b)=>a.date.localeCompare(b.date));
+    $('statDeadline').textContent=future.length?fmt(future[0].date):'—';
+    $('statDeadlineSub').textContent=future.length?future[0].title:'新增截止日來提醒自己';
+    $('statOffers').textContent=data.schools.filter(s=>s.status==='已錄取').length;
+    const schoolAvg=data.schools.length?data.schools.reduce((sum,s)=>sum+(Number(s.progress)||0),0)/data.schools.length:0;
+    const taskRate=data.tasks.length?done/data.tasks.length*100:0;
+    const overall=Math.round(data.schools.length?schoolAvg*.7+taskRate*.3:taskRate);
+    $('heroPercent').textContent=overall+'%';
+  }
+  function renderSchools(){
+    const filtered=data.schools.filter(s=>currentFilter==='all'||s.status===currentFilter);
+    $('schoolList').innerHTML=filtered.length?filtered.map(s=>`
+      <article class="school-card">
+        <div class="school-mark">${s.country==='英國'?'英':s.country==='美國'?'美':s.country==='加拿大'?'加':s.country==='澳洲'?'澳':s.country==='新加坡'?'新':'國際'}</div>
+        <div>
+          <div class="school-title"><strong>${esc(s.name)}</strong><span class="country">${esc(s.country)}</span></div>
+          <div class="school-meta">${esc(s.program||'尚未填寫科系')} · 截止日：${fmt(s.deadline)}</div>
+          ${s.website?`<div class="school-meta"><a class="website-link" href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">學校官方網站 ↗</a></div>`:'<div class="school-meta">尚未新增官網連結</div>'}
+          <div class="mini-progress"><span style="width:${Math.max(0,Math.min(100,Number(s.progress)||0))}%"></span></div>
+          <div class="progress-label"><span>申請準備進度</span><span>${Math.max(0,Math.min(100,Number(s.progress)||0))}%</span></div>
+          ${s.notes?`<div class="school-meta" style="margin-bottom:0"> ${esc(s.notes)}</div>`:''}
+          <div class="card-actions"><button class="tiny-btn" data-edit-school="${s.id}">✎ 編輯</button><button class="tiny-btn" data-step-school="${s.id}">＋ 進度 +10%</button><button class="tiny-btn" data-delete-school="${s.id}">刪除</button></div>
+        </div>
+        <span class="status ${statusClass(s.status)}">${esc(s.status)}</span>
+      </article>`).join(''):'<div class="empty">這個分類還沒有學校喔 <br>試著新增一間學校吧！</div>';
+  }
+  function renderTasks(){
+    $('taskCount').textContent=`${data.tasks.filter(t=>!t.done).length} 項待完成`;
+    const sorted=[...data.tasks].sort((a,b)=>Number(a.done)-Number(b.done)||(a.due||'9999').localeCompare(b.due||'9999'));
+    $('taskList').innerHTML=sorted.length?sorted.map(t=>{
+      const left=daysUntil(t.due); const late=!t.done&&left!==null&&left<0;
+      return `<label class="task ${t.done?'done':''}">
+        <input type="checkbox" data-task-check="${t.id}" ${t.done?'checked':''} aria-label="完成任務">
+        <div class="task-body"><div class="task-title">${esc(t.title)}</div><div class="task-meta">${esc(t.category)}${t.due?' · '+fmt(t.due):''}</div></div>
+        ${t.due?`<span class="due ${late?'late':''}">${late?'已逾期':left===0?'今天到期':left>0?`${left} 天後`:`逾期 ${Math.abs(left)} 天`}</span>`:''}
+        <button type="button" class="tiny-btn" data-delete-task="${t.id}" aria-label="刪除任務">×</button>
+      </label>`;
+    }).join(''):'<div class="empty">待辦清單空空的！可以休息一下，也可以新增下一個小目標 </div>';
+  }
+  function renderDeadlines(){
+    const items=[...data.deadlines].filter(d=>d.date).sort((a,b)=>a.date.localeCompare(b.date));
+    $('deadlineList').innerHTML=items.length?items.slice(0,6).map(d=>{
+      const date=new Date(d.date+'T00:00:00');const left=daysUntil(d.date);
+      return `<div class="deadline"><div class="date-box"><b>${date.getDate()}</b><span>${date.getMonth()+1} 月</span></div><div class="deadline-info"><strong>${esc(d.title)}</strong><span>${esc(d.type)}</span></div><div class="countdown">${left<0?'已過期':left===0?'今天':`${left} 天後`}</div><button class="tiny-btn" data-delete-deadline="${d.id}" aria-label="刪除日程">×</button></div>`;
+    }).join(''):'<div class="empty">還沒有重要日程，新增一個來提醒自己吧 </div>';
+  }
+  function render(){renderStats();renderSchools();renderTasks();renderDeadlines();}
+  function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300);}
+  function openModal(id){$(id).classList.add('show');}
+  function closeModal(id){$(id).classList.remove('show');}
+  document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+  document.querySelectorAll('.modal-backdrop').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('show')}));
+  function resetSchoolForm(){ $('schoolForm').reset();$('schoolId').value='';$('schoolProgress').value=20;$('schoolModalTitle').textContent='新增申請學校';}
+  function openSchool(id=null){
+    resetSchoolForm();
+    if(id!==null){const s=data.schools.find(x=>x.id===Number(id));if(!s)return;
+      $('schoolId').value=s.id;$('schoolName').value=s.name;$('schoolProgram').value=s.program||'';$('schoolWebsite').value=s.website||'';
+      $('schoolCountry').value=s.country;$('schoolStatus').value=s.status;$('schoolDeadline').value=s.deadline||'';
+      $('schoolProgress').value=s.progress;$('schoolNotes').value=s.notes||'';$('schoolModalTitle').textContent='編輯申請學校';
+    }
+    openModal('schoolModal');
+  }
+  $('addSchoolBtn').addEventListener('click',()=>openSchool());
+  $('quickAdd').addEventListener('click',()=>openSchool());
+  $('schoolForm').addEventListener('submit',e=>{
+    e.preventDefault();const id=$('schoolId').value;
+    const item={id:id?Number(id):nextId++,name:$('schoolName').value.trim(),program:$('schoolProgram').value.trim(),website:$('schoolWebsite').value.trim(),country:$('schoolCountry').value,status:$('schoolStatus').value,deadline:$('schoolDeadline').value,progress:Math.max(0,Math.min(100,Number($('schoolProgress').value)||0)),notes:$('schoolNotes').value.trim()};
+    if(id){data.schools=data.schools.map(s=>s.id===Number(id)?item:s);toast('學校資料已更新 ');}
+    else{data.schools.push(item);toast('新夢想已加入清單！');}
+    closeModal('schoolModal');save();
+  });
+  $('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;currentFilter=b.dataset.filter;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b));renderSchools();});
+  $('schoolList').addEventListener('click',e=>{
+    const edit=e.target.closest('[data-edit-school]');const step=e.target.closest('[data-step-school]');const del=e.target.closest('[data-delete-school]');
+    if(edit)openSchool(edit.dataset.editSchool);
+    if(step){const s=data.schools.find(x=>x.id===Number(step.dataset.stepSchool));if(s){s.progress=Math.min(100,(Number(s.progress)||0)+10);if(s.progress===100&&s.status==='準備中')s.status='申請中';save();toast('進度 +10%，你做得很好！');}}
+    if(del){const id=Number(del.dataset.deleteSchool);const s=data.schools.find(x=>x.id===id);if(s&&confirm(`確定刪除「${s.name}」嗎？`)){data.schools=data.schools.filter(x=>x.id!==id);save();toast('已刪除學校');}}
+  });
+  $('addTaskBtn').addEventListener('click',()=>{$('taskForm').reset();openModal('taskModal');});
+  $('taskForm').addEventListener('submit',e=>{e.preventDefault();data.tasks.push({id:nextId++,title:$('taskTitleInput').value.trim(),category:$('taskCategory').value,due:$('taskDue').value,done:false});closeModal('taskModal');save();toast('待辦已新增，慢慢完成就好 ');});
+  $('taskList').addEventListener('change',e=>{const id=Number(e.target.dataset.taskCheck);if(!id)return;const t=data.tasks.find(x=>x.id===id);if(t){t.done=e.target.checked;save();toast(t.done?'完成一項任務，太棒了！ ':'已重新開啟任務');}});
+  $('taskList').addEventListener('click',e=>{const b=e.target.closest('[data-delete-task]');if(!b)return;data.tasks=data.tasks.filter(t=>t.id!==Number(b.dataset.deleteTask));save();toast('已刪除待辦');});
+  $('addDeadlineBtn').addEventListener('click',()=>{$('deadlineForm').reset();openModal('deadlineModal');});
+  $('deadlineForm').addEventListener('submit',e=>{e.preventDefault();data.deadlines.push({id:nextId++,title:$('deadlineTitle').value.trim(),date:$('deadlineDate').value,type:$('deadlineType').value});closeModal('deadlineModal');save();toast('重要日程已儲存');});
+  $('deadlineList').addEventListener('click',e=>{const b=e.target.closest('[data-delete-deadline]');if(!b)return;data.deadlines=data.deadlines.filter(d=>d.id!==Number(b.dataset.deleteDeadline));save();toast('已刪除日程');});
+  const quotes=[
+    ['你不必一次做到完美','每個人都有自己的步調。今天比昨天多前進一點，就值得肯定。'],
+    ['夢想值得你慢慢準備','申請路上有很多小任務，但你正在把它們一件件變成可能。'],
+    ['休息也是計畫的一部分','累的時候就喘口氣吧。好好照顧自己，也是走向遠方的重要能力。'],
+    ['先完成，再慢慢變好','不用等到完全準備好才開始。每一個小行動，都會讓下一步更清楚。'],
+    ['未來的你會感謝現在的自己','今天完成的一項準備，都讓未來更靠近一點。']
+  ];
+  $('newQuoteBtn').addEventListener('click',()=>{const q=quotes[Math.floor(Math.random()*quotes.length)];$('quoteTitle').textContent=q[0];$('quoteText').textContent=q[1];});
+  $('exportBtn').addEventListener('click',()=>{
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='dream-abroad-data.json';a.click();URL.revokeObjectURL(url);toast('已匯出 JSON 備份檔');
+  });
+  render();
+})();
+</script>
+</body>
+</html>
